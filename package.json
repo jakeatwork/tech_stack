@@ -9,6 +9,10 @@
     "react": "15.3.2",
     "react-native": "0.34.1",
     "react-redux": "^4.4.5",
+    "reactotron-react-native": "^1.1.4",
     "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "eslint-config-rallycoding": "^3.1.0"
   }
 }
