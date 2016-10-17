@@ -1,18 +1,31 @@
 // Import libraries
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  LayoutAnimation
+} from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection } from './common';
 import * as actions from '../actions';
 
 // Create component
 class ListItem extends Component {
-  renderDescription() {
-    const { library, selectedLibraryId } = this.props;
+  componentWillUpdate() {
+    LayoutAnimation.spring();
+  }
 
-    if (library.id === selectedLibraryId) {
+  renderDescription() {
+    const { library, expanded } = this.props;
+
+    if (expanded) {
       return (
-        <Text>{library.description}</Text>
+        <CardSection>
+          <Text style={{ flex: 1 }}>
+            {library.description}
+          </Text>
+        </CardSection>
       );
     }
   }
@@ -46,8 +59,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => {
-  return { selectedLibraryId: state.selectedLibraryId };
+const mapStateToProps = (state, ownProps) => {
+  const expanded = state.selectedLibraryId === ownProps.library.id;
+
+  return { expanded };
 };
 
 // Export component
